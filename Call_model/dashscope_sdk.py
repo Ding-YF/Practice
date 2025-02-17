@@ -6,7 +6,7 @@ from rich.markdown import Markdown
 from prompt_toolkit import PromptSession
 # Model API
 from dashscope import Generation
-import dashscope
+# For file name
 import datetime
 
 GENERAL_MODELS = [
@@ -39,7 +39,7 @@ def general_model():
     stream_output = False
     reason_switch = False
     answer_switch = False
-    model_called = GENERAL_MODELS[4]
+    model_called = GENERAL_MODELS[5]
     messages = [{'role': 'system', 'content': 'You are a helpful assistant.'}]
     while True:
         console = Console()
@@ -69,18 +69,18 @@ def general_model():
                 # temporary = 0.7
             )
         if model_called == 'deepseek-r1':
-            if stream_output == True:
+            if stream_output:
                 for chunk in response:
                     thinking = chunk.output.choices[0].message.reasoning_content
                     answering = chunk.output.choices[0].message.content
-                    if(thinking !="" and answering == ""): 
+                    if(thinking and not answering): 
                         if not reason_switch:
                             console.print("[bold blue]思考过程:[/]")
                             reason_switch = True
                         reasoning_content_tmp = chunk.output.choices[0].message.reasoning_content
                         reasoning_content_tmp_md = Markdown("".join(reasoning_content_tmp.splitlines()))
                         console.print(reasoning_content_tmp_md, end="")
-                    elif(answering != ""):
+                    elif answering:
                         if not answer_switch:
                             console.print("[bold blue]最终回答:[/]")
                             answer_switch = True
@@ -110,6 +110,7 @@ def general_model():
             # Append model output to messages
             log(f"AI:{content}")
             messages.append({'role': 'assistant', 'content': content})
+
         round_count+=1
 
 # Call coder model
