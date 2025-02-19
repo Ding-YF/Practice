@@ -44,7 +44,7 @@ def general_model():
     answer_switch = False
     messages = [{'role': 'system', 'content': 'You are a helpful assistant.'}]
     while True:
-        console.print("[bold red]-[/]"*40+f"[bold red]第{round_count}轮对话[/]"+"[bold red]-[/]"*40)
+        console.print("[bold red]-[/]"*30+f"[bold red]{model_called}##第{round_count}轮对话[/]"+"[bold red]-[/]"*30)
         # Multi input
         session = PromptSession()
         in_content = session.prompt(
