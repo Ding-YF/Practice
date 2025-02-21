@@ -24,3 +24,4 @@ VISUAL_MODELS = ['qwen-vl-max']
 
 ## 注意
 - 其中通用模型的输出进行了优化，包括Markdwon渲染(默认开启)和流式输出(仅支持deepseek-r1,需要手动开启);
+- LLM-Launch.bat 是 windows 下的启动脚本，根据情况修改程序路径，放入`Start Menu`后，配合PowerToys可以方便快速的启动程序;
